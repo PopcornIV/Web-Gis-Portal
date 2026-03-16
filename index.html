@@ -50,6 +50,10 @@
  <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.js"></script>
 <!-- minimap  -->
 <script src="plugins/minimap/Control.MiniMap.min.js"></script>
+<!-- ajax -->
+ <script src="plugins/ajax/leaflet.ajax.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js"></script>
 
 </head>
 
@@ -119,28 +123,28 @@
     L.control.layers(baseMaps).addTo(map);
 
 // Map polygon
-    var polygon = L.polygon([
-      [-1.2921, 37.8219],
-      [-1.3869, 38.6829],
-      [-2.3333, 37.8333]
-    ]).addTo(map);
-    polygon.bindPopup("This is a polygon representing a region in Kenya.");
+    // var polygon = L.polygon([
+    //   [-1.2921, 37.8219],
+    //   [-1.3869, 38.6829],
+    //   [-2.3333, 37.8333]
+    // ]).addTo(map);
+    // polygon.bindPopup("This is a polygon representing a region in Kenya.");
 
 
 // Map marker
-    var marker = L.marker([0.518925, 35.27401]).addTo(map);
+    // var marker = L.marker([0.518925, 35.27401]).addTo(map);
 
-    marker.bindPopup("<b>Eldore City</b><br>Eldoret is the newest city in the country.") .openPopup();
+    // marker.bindPopup("<b>Eldore City</b><br>Eldoret is the newest city in the country.") .bindPopup();
 
 // Map circle
-    var circle = L.circle([0.299022, 37.804199], {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5,
-      radius: 100000
-    }).addTo(map);
+    // var circle = L.circle([0.299022, 37.804199], {
+    //   color: 'red',
+    //   fillColor: '#f03',
+    //   fillOpacity: 0.5,
+    //   radius: 100000
+    // }).addTo(map);
 
-    circle.bindPopup("The country's central region.");
+    // circle.bindPopup("The country's central region.");
 
 // On click function to alert longitude and latitude
     // function onMapClick(e) {
@@ -186,6 +190,28 @@ map.on('pm:create', function(e) {
 
 // mini map control
 var miniMap = new L.Control.MiniMap(Esri_WorldImagery_minimap, {position: 'bottomright'}).addTo(map);
+
+// Define your UTM zone (example: Zone 37N for Kenya)
+var kenyaProj = '+proj=tmerc +lat_0=0 +lon_0=37 +k=1 +x_0=500000 +y_0=0 +datum=arc1960 +units=m +no_defs';
+var wgs84 = '+proj=longlat +datum=WGS84 +no_defs';
+
+function localToLatLng(easting, northing) {
+    var coords = proj4(kenyaProj, wgs84, [easting, northing]);
+    return L.latLng(coords[1], coords[0]);
+}
+
+var geojsonLayer = new L.GeoJSON.AJAX("data/spotheights.geojson", {
+    pointToLayer: function(feature, latlng) {
+        var latlng = localToLatLng(feature.properties.E, feature.properties.N);
+        return L.marker(latlng).bindPopup("Point: " + feature.properties.POINT);
+    }
+});
+
+geojsonLayer.on('data:loaded', function() {
+    console.log("All data loaded:", geojsonLayer.toGeoJSON());
+    });
+
+geojsonLayer.addTo(map);
 
 </script>
 
