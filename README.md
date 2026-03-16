@@ -1,19 +1,76 @@
 # Web GIS Portal
 
 ## Overview
-This project is a Web GIS portal designed to visualise and interact with spatial data through an interactive map interface. The system allows users to load geospatial datasets, style map layers, and explore geographic information dynamically.
+The Web GIS Portal is a web-based geographic information system designed to visualize and interact with spatial datasets through an interactive map interface. The platform allows users to explore geospatial information, display spatial layers, and apply styling to geographic features.
+
+This project demonstrates the integration of modern web technologies with GIS data to create an interactive mapping portal accessible through a web browser.
+
+## Objectives
+The main goal of this project is to develop a functional Web GIS platform that can:
+
+- Display geospatial datasets on an interactive map
+- Load and visualize spatial data such as GeoJSON layers
+- Style map features such as points, lines, and polygons
+- Provide an intuitive interface for geographic data exploration
 
 ## Features
-- Interactive map visualization
-- Spatial data loading
-- Custom point and layer styling
-- Attribute data display
-- Web-based GIS interface
+- Interactive web map interface
+- Spatial data visualization
+- Custom styling for map layers
+- Dynamic loading of geographic datasets
+- User-friendly map navigation
 
 ## Technology Stack
-Frontend:
+
+Frontend
+- HTML
+- CSS
+- JavaScript
 - Leaflet
 
-## Data Formats:
+GIS Data Formats
 - GeoJSON
+- Shapefiles
 - Spatial datasets
+
+## Project Structure
+Web-Gis-Portal
+│
+├── .vscode
+│ ├── settings.json
+│
+├── data
+│ ├── buildings.json
+│ ├── spoteheights.json
+│
+├── plugins
+│ ├──ajax
+│ ├── minimap
+│ ├── mouseposition
+│ └── sidebar
+│
+├── data
+│ ├── jquery-ui.min.css
+│ └── jquery-ui.min.js
+│
+├──  index.html
+└── style.css
+
+## Installation
+Clone the repository
+
+Install dependencies and run the development server.
+
+## Future Improvements
+- Layer filtering
+- Attribute table viewing
+- Spatial search functionality
+- Map layer toggling
+- User authentication
+- Web map performance optimization
+
+## Author
+Robert Korir
+
+## License
+This project is licensed under the MIT License.
