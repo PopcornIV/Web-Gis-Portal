@@ -1,0 +1,29 @@
+{
+"type": "FeatureCollection",
+"name": "buildings",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "POINT": 1, "N": 9861384.169, "E": 257765.919, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257765.919, 9861384.168999999761581 ] } },
+{ "type": "Feature", "properties": { "POINT": 2, "N": 9861383.684, "E": 257766.075, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257766.075000000011642, 9861383.684000000357628 ] } },
+{ "type": "Feature", "properties": { "POINT": 3, "N": 9861383.166, "E": 257766.458, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257766.458000000013271, 9861383.165999999269843 ] } },
+{ "type": "Feature", "properties": { "POINT": 4, "N": 9861382.7, "E": 257766.958, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257766.958000000013271, 9861382.699999999254942 ] } },
+{ "type": "Feature", "properties": { "POINT": 5, "N": 9861382.528000001, "E": 257767.403, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257767.403, 9861382.528000000864267 ] } },
+{ "type": "Feature", "properties": { "POINT": 6, "N": 9861382.338, "E": 257768.334, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257768.334, 9861382.337999999523163 ] } },
+{ "type": "Feature", "properties": { "POINT": 7, "N": 9861382.168, "E": 257770.284, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257770.284000000014203, 9861382.167999999597669 ] } },
+{ "type": "Feature", "properties": { "POINT": 8, "N": 9861380.425000001, "E": 257772.692, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257772.692000000010012, 9861380.425000000745058 ] } },
+{ "type": "Feature", "properties": { "POINT": 9, "N": 9861375.404, "E": 257766.32, "D": "gate" }, "geometry": { "type": "Point", "coordinates": [ 257766.32, 9861375.403999999165535 ] } },
+{ "type": "Feature", "properties": { "POINT": 10, "N": 9861379.65, "E": 257774.063, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257774.063, 9861379.650000000372529 ] } },
+{ "type": "Feature", "properties": { "POINT": 11, "N": 9861382.111, "E": 257776.096, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257776.096, 9861382.110999999567866 ] } },
+{ "type": "Feature", "properties": { "POINT": 12, "N": 9861380.224, "E": 257779.001, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257779.00099999998929, 9861380.223999999463558 ] } },
+{ "type": "Feature", "properties": { "POINT": 13, "N": 9861378.832, "E": 257780.975, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257780.975, 9861378.832000000402331 ] } },
+{ "type": "Feature", "properties": { "POINT": 14, "N": 9861378.305, "E": 257781.912, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257781.912000000011176, 9861378.304999999701977 ] } },
+{ "type": "Feature", "properties": { "POINT": 15, "N": 9861378.067, "E": 257782.79, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257782.79, 9861378.066999999806285 ] } },
+{ "type": "Feature", "properties": { "POINT": 16, "N": 9861378.538000001, "E": 257783.539, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257783.538999999989755, 9861378.53800000064075 ] } },
+{ "type": "Feature", "properties": { "POINT": 17, "N": 9861378.857000001, "E": 257783.985, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257783.98499999998603, 9861378.85700000077486 ] } },
+{ "type": "Feature", "properties": { "POINT": 18, "N": 9861379.52, "E": 257784.335, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257784.335, 9861379.519999999552965 ] } },
+{ "type": "Feature", "properties": { "POINT": 19, "N": 9861380.095000001, "E": 257784.389, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257784.389, 9861380.095000000670552 ] } },
+{ "type": "Feature", "properties": { "POINT": 20, "N": 9861380.718, "E": 257783.87, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257783.87, 9861380.718000000342727 ] } },
+{ "type": "Feature", "properties": { "POINT": 21, "N": 9861384.365, "E": 257786.028, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257786.028, 9861384.365000000223517 ] } },
+{ "type": "Feature", "properties": { "POINT": 22, "N": 9861390.39, "E": 257789.712, "D": "Bld-cnr" }, "geometry": { "type": "Point", "coordinates": [ 257789.712, 9861390.390000000596046 ] } }
+]
+}
