@@ -152,14 +152,14 @@
     // }
 
     // map.on('click', onMapClick);
-    var popup = L.popup();
-    function onMapClick(e) {
-     popup
-        .setLatLng(e.latlng)
-        .setContent("You clicked the map at " + e.latlng.toString())
-        .openOn(map);
-    }
-     map.on('click', onMapClick);
+    // var popup = L.popup();
+    // function onMapClick(e) {
+    //  popup
+    //     .setLatLng(e.latlng)
+    //     .setContent("You clicked the map at " + e.latlng.toString())
+    //     .openOn(map);
+    // }
+    //  map.on('click', onMapClick);
 
     // Geogrphical scale control
     L.control.scale(
@@ -191,27 +191,56 @@ map.on('pm:create', function(e) {
 // mini map control
 var miniMap = new L.Control.MiniMap(Esri_WorldImagery_minimap, {position: 'bottomright'}).addTo(map);
 
-// Define your UTM zone (example: Zone 37N for Kenya)
-var kenyaProj = '+proj=tmerc +lat_0=0 +lon_0=37 +k=1 +x_0=500000 +y_0=0 +datum=arc1960 +units=m +no_defs';
-var wgs84 = '+proj=longlat +datum=WGS84 +no_defs';
+// Adding GeoJSON data to the map
+// Railway lines GeoJSON data
+var Railway_lines = new L.GeoJSON.AJAX("data/Railway_lines.geojson" , {style:style_railway_lines}).addTo(map);
 
-function localToLatLng(easting, northing) {
-    var coords = proj4(kenyaProj, wgs84, [easting, northing]);
-    return L.latLng(coords[1], coords[0]);
-}
+function style_railway_lines(feature) {
+    var attributeValue = feature.properties ['name'];
+    var color;
+    var weight;
+    console.log(attributeValue);
 
-var geojsonLayer = new L.GeoJSON.AJAX("data/spotheights.geojson", {
-    pointToLayer: function(feature, latlng) {
-        var latlng = localToLatLng(feature.properties.E, feature.properties.N);
-        return L.marker(latlng).bindPopup("Point: " + feature.properties.POINT);
+    switch (attributeValue) {
+        case 'Mombasa-Nairobi Standard Gauge Railway':
+            return { color: 'red', weight: 3 };
+            ;
+        case 'NICD - Longonot Railway Link':
+            return { color: 'orange', weight: 3 };
+        case 'Nairobi-Naivasha Standard Gauge Railway':
+            return { color: 'green', weight: 5 };
+        case 'SGR-MGR Passanger Rail link':
+            return { color: 'teal', weight: 5 };
+        case 'SGR Nairobi-Naivasha':
+            return { color: 'purple', weight: 5 };
+        case 'Uganda Railway':
+            return { color: 'brown', weight: 5 };
+        default:
+            return { color: 'blue', weight: 3 };
     }
-});
-
-geojsonLayer.on('data:loaded', function() {
-    console.log("All data loaded:", geojsonLayer.toGeoJSON());
+}
+    
+Railway_lines.on('data:loaded', function() {
+    map.fitBounds(Railway_lines.getBounds());
     });
 
-geojsonLayer.addTo(map);
+Railway_lines.addTo(map);
+
+//Railway stations GeoJSON data
+// var Railway_stations = new L.GeoJSON.AJAX("data/Railway_points.geojson" , {
+//     pointToLayer: function(feature, latlng) {
+//         return L.marker(latlng, {icon: L.icon({
+//             iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+//             iconSize: [25, 25],
+//             iconAnchor: [12, 12],
+//             popupAnchor: [0, -12]
+//         })});
+//     }
+// }).addTo(map);
+
+// Railway_stations.on('data:loaded', function() {
+//     map.fitBounds(Railway_stations.getBounds());
+//     });
 
 </script>
 
