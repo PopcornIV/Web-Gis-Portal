@@ -3,247 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebMap </title>
+    <title>Web GIS Map</title>
 
-<!-- Leaflet CSS -->
-     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-<!-- style css -->
-     <link rel="stylesheet" href="style.css">
-<!-- Bootstrap CSS  -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- jquery ui css -->
-     <link rel="stylesheet" href="source/jquery-ui.min.css">
-<!-- sidebar css -->
-        <link rel="stylesheet" href="plugins/sidebar/L.Control.Sidebar.css">
-<!-- easy button link css -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-<!-- fontawesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<!-- Polyline Measure css -->
-<link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
-<!-- mouse position control css -->
-<link rel="stylesheet" href="plugins/mouseposition/L.Control.MousePosition.css" />
-<!-- Geoman tools -->
- <link rel="stylesheet"href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css"/>
-<!-- minimap  -->
-<link rel="stylesheet" href="plugins/minimap/Control.MiniMap.min.css"/>
+    <!-- ================== CSS SECTION ================== -->
 
- <!-- Leaflet JavaScript -->
-      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-     crossorigin=""></script>
-<!-- jquery  js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script> 
-<!-- jquery ui js -->
-     <script src="source/jquery-ui.min.js"></script>
-<!-- sidebar js -->
-     <script src="plugins/sidebar/L.Control.Sidebar.js"></script>
-<!-- easy button link js -->
-<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-<!-- Polyline Measure js -->
-<script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
-<!-- mouse position control js -->
-<script src="plugins/mouseposition/L.Control.MousePosition.js"></script>
-<!-- Geoman tools js  -->
- <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.js"></script>
-<!-- minimap  -->
-<script src="plugins/minimap/Control.MiniMap.min.js"></script>
-<!-- ajax -->
- <script src="plugins/ajax/leaflet.ajax.js"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.8.0/proj4.js"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="plugins/sidebar/L.Control.Sidebar.css">
+    <link rel="stylesheet" href="plugins/mouseposition/L.Control.MousePosition.css">
+    <link rel="stylesheet" href="plugins/minimap/Control.MiniMap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <link rel="stylesheet" href="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-    <div id="map" ></div>
+    <!-- ================== MAP CONTAINER ================== -->
+    <div id="map"></div>
 
+    <!-- Sidebar -->
     <div id="sidebar">
-         <h1>Sidebar</h1>
+        <h2>Map Tools</h2>
+        <p>This sidebar can be used for controls or information.</p>
     </div>
 
-<script> 
-//  Map initialisation, with location cordinates and a zoom level
-    var map = L.map('map').setView([0.0236, 37.9062], 6);
+    <!-- ================== JAVASCRIPT SECTION ================== -->
 
-// Map tile layer, for this case OpenStreetMap tile layer
-    var OpenStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 100,
-        attribution: '© OpenStreetMap contributors'
-    });
+    <!-- Core Libraries -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
 
-		var Esri_WorldImagery_minimap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {maxZoom: 23});
+    <!-- Plugins -->
+    <script src="plugins/sidebar/L.Control.Sidebar.js"></script>
+    <script src="plugins/mouseposition/L.Control.MousePosition.js"></script>
+    <script src="plugins/minimap/Control.MiniMap.min.js"></script>
+    <script src="plugins/ajax/leaflet.ajax.js"></script>
 
-// Stadia.Alidade tile layer
- 
-    var Stadia_AlidadeSatellite = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}', {
-	maxZoom: 100,
-	ext: 'jpg'
-    }) ;
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <script src="https://ppete2.github.io/Leaflet.PolylineMeasure/Leaflet.PolylineMeasure.js"></script>
+    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.js"></script>
 
-// Esrimaps tile layer
-    var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 100,
-    });
+    <!-- ================== MAIN SCRIPT ================== -->
+    <script>
 
-// Google Streets tile layer
-    var GoogleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{
-    maxZoom: 20,
-    subdomains:['mt0','mt1','mt2','mt3']
-    });
+    // ================== 1. MAP INITIALIZATION ==================
+    // Setting map view to Kenya (learning how center + zoom works)
+    const map = L.map('map').setView([0.0236, 37.9062], 6);
 
-// Adding the tile layer to the map
+    // ================== 2. BASE MAPS ==================
+    const OpenStreetMap = L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+    );
+
+    const Esri_WorldImagery = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+    );
+
+    const GoogleStreets = L.tileLayer(
+        'http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',
+        { subdomains: ['mt0','mt1','mt2','mt3'] }
+    );
+
+    // Add default basemap
     GoogleStreets.addTo(map);
 
-// Layer control
-// sidebar control
-    var sidebar = L.control.sidebar('sidebar', {
-    position: 'left'
-   });
+    // UI CONTROLS 
 
-   map.addControl(sidebar);
+    // Sidebar
+    const sidebar = L.control.sidebar('sidebar', { position: 'left' });
+    map.addControl(sidebar);
 
-// Adding an easy button to the map
-
-    L.easyButton('fa-exchange-alt', function(btn, map){
-    sidebar.toggle();
+    L.easyButton('<i class="fa fa-exchange" aria-hidden="true"></i>', function(){
+        sidebar.toggle();
     }).addTo(map);
 
-// Base maps object
-    var baseMaps = {
-    "OpenStreetMap": OpenStreetMap,
-    "Stadia Alidade Satellite": Stadia_AlidadeSatellite,
-    "Esri World Imagery": Esri_WorldImagery,
-    "Google Streets": GoogleStreets
-    };
+    // Scale
+    L.control.scale({ imperial: false }).addTo(map);
 
-    L.control.layers(baseMaps).addTo(map);
+    // Mouse position
+    L.control.mousePosition().addTo(map);
 
-// Map polygon
-    // var polygon = L.polygon([
-    //   [-1.2921, 37.8219],
-    //   [-1.3869, 38.6829],
-    //   [-2.3333, 37.8333]
-    // ]).addTo(map);
-    // polygon.bindPopup("This is a polygon representing a region in Kenya.");
+    // Measure tool
+    L.control.polylineMeasure().addTo(map);
 
+    // Mini map
+    const miniMapLayer = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+    );
 
-// Map marker
-    // var marker = L.marker([0.518925, 35.27401]).addTo(map);
+    new L.Control.MiniMap(miniMapLayer).addTo(map);
 
-    // marker.bindPopup("<b>Eldore City</b><br>Eldoret is the newest city in the country.") .bindPopup();
-
-// Map circle
-    // var circle = L.circle([0.299022, 37.804199], {
-    //   color: 'red',
-    //   fillColor: '#f03',
-    //   fillOpacity: 0.5,
-    //   radius: 100000
-    // }).addTo(map);
-
-    // circle.bindPopup("The country's central region.");
-
-// On click function to alert longitude and latitude
-    // function onMapClick(e) {
-    // alert("You clicked the map at " + e.latlng);
-    // }
-
-    // map.on('click', onMapClick);
-    // var popup = L.popup();
-    // function onMapClick(e) {
-    //  popup
-    //     .setLatLng(e.latlng)
-    //     .setContent("You clicked the map at " + e.latlng.toString())
-    //     .openOn(map);
-    // }
-    //  map.on('click', onMapClick);
-
-    // Geogrphical scale control
-    L.control.scale(
-       {position: 'bottomleft', maxwidth: 400, imperial: false}
-    ).addTo(map);
-
-    // Measure control
-    L.control.polylineMeasure(
-        {position: 'topright'}
-    ).addTo(map);
-
-    // mouse position control
-    L.control.mousePosition(
-        {position: 'bottomright', separator: ' | ', numDigits: 5}
-    ).addTo(map);
-
-    // Geoman tool control
-    map.pm.addControls({  
-  position: 'topleft',  
-  drawCircleMarker: false,
-  rotateMode: false,
-}); 
-
-// event listener for created layer
-map.on('pm:create', function(e) {
-  console.log(e);
-}); 
-
-// mini map control
-var miniMap = new L.Control.MiniMap(Esri_WorldImagery_minimap, {position: 'bottomright'}).addTo(map);
-
-// Adding GeoJSON data to the map
-// Railway lines GeoJSON data
-var Railway_lines = new L.GeoJSON.AJAX("data/Railway_lines.geojson" , {style:style_railway_lines}).addTo(map);
-
-function style_railway_lines(feature) {
-    var attributeValue = feature.properties ['name'];
-    var color;
-    var weight;
-    console.log(attributeValue);
-
-    switch (attributeValue) {
-        case 'Mombasa-Nairobi Standard Gauge Railway':
-            return { color: 'red', weight: 3 };
-            ;
-        case 'NICD - Longonot Railway Link':
-            return { color: 'orange', weight: 3 };
-        case 'Nairobi-Naivasha Standard Gauge Railway':
-            return { color: 'green', weight: 5 };
-        case 'SGR-MGR Passanger Rail link':
-            return { color: 'teal', weight: 5 };
-        case 'SGR Nairobi-Naivasha':
-            return { color: 'purple', weight: 5 };
-        case 'Uganda Railway':
-            return { color: 'brown', weight: 5 };
-        default:
-            return { color: 'blue', weight: 3 };
-    }
-}
-    
-Railway_lines.on('data:loaded', function() {
-    map.fitBounds(Railway_lines.getBounds());
+    // Geoman drawing tools
+    map.pm.addControls({
+        position: 'topleft',
+        drawCircleMarker: false
     });
 
-Railway_lines.addTo(map);
+    // ================== 4. DATA + STYLING ==================
 
-//Railway stations GeoJSON data
-// var Railway_stations = new L.GeoJSON.AJAX("data/Railway_points.geojson" , {
-//     pointToLayer: function(feature, latlng) {
-//         return L.marker(latlng, {icon: L.icon({
-//             iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-//             iconSize: [25, 25],
-//             iconAnchor: [12, 12],
-//             popupAnchor: [0, -12]
-//         })});
-//     }
-// }).addTo(map);
+    // Styling railway lines based on attribute (learning classification)
+    function styleRailway(feature) {
+        const name = feature.properties.name;
 
-// Railway_stations.on('data:loaded', function() {
-//     map.fitBounds(Railway_stations.getBounds());
-//     });
+        switch (name) {
+            case 'Mombasa-Nairobi Standard Gauge Railway':
+                return { color: 'red', weight: 3 };
+            case 'Nairobi-Naivasha Standard Gauge Railway':
+                return { color: 'green', weight: 5 };
+            case 'Train railway':
+                return { color: 'orange', weight: 4 };  
+            case 'SGR Nairobi Naivasha':
+                return { color: 'purple', weight: 2 }; 
+            case 'SGR-MGR Passenger Rail Link':
+                return { color: 'brown', weight: 3 }; 
+            case 'NICD - Longonot Railway Link':
+                return { color: 'teal', weight: 3 };   
+            case 'SGR-MRG Link':
+                return { color: 'cyan', weight: 3 }; 
+            case 'Uganda Railway':
+                return { color: 'magenta', weight: 4 };   
+            case 'SGR Naivasha–Kisumu':
+                return { color: 'yellow', weight: 3 };                 
+            default:
+                return { color: 'blue', weight: 2 };
+        }
+    }
 
-</script>
+// Load GeoJSON
+const railwayLines = new L.GeoJSON.AJAX(
+    "data/Railway_lines.geojson",
+    {
+        style: styleRailway,
+        onEachFeature: onEachRailwayFeature
+    }
+).addTo(map);
 
+// Fit map to data once loaded
+railwayLines.on('data:loaded', function () {
+    map.fitBounds(railwayLines.getBounds());
+});
+
+
+// ================== FEATURE HANDLING ==================
+function onEachRailwayFeature(feature, layer) {
+
+    const props = feature.properties;
+
+    // Handle missing names
+    let name = props.name || "Unnamed Railway Line";
+
+    // Popup content
+    const popupContent = `
+        <strong>${name}</strong><br/>
+        Railway Type: ${props.railway}<br/>
+        OSM ID: ${props.osm_id}<br/>
+        Source: ${props.source || "N/A"}
+    `;
+
+    // Bind popup 
+    layer.bindPopup(popupContent);
+
+    // Tooltip on CLICK 
+    layer.on('click', function (e) {
+        const tooltipContent = `
+            <strong>${name}</strong><br/>
+            Clicked at: ${e.latlng.lat.toFixed(4)}, ${e.latlng.lng.toFixed(4)}
+        `;
+
+        layer.bindTooltip(tooltipContent, { permanent: false }).openTooltip();
+    });
+}
+
+    // ================== 5. LAYER CONTROL ==================
+    const baseMaps = {
+        "OpenStreetMap": OpenStreetMap,
+        "Esri Imagery": Esri_WorldImagery,
+        "Google Streets": GoogleStreets
+    };
+
+    const overlays = {
+        "Railway Lines": railwayLines
+    };
+
+    L.control.layers(baseMaps, overlays).addTo(map);
+
+    </script>
 
 </body>
 </html>
