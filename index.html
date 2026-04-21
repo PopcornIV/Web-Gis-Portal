@@ -33,8 +33,15 @@
 
     <!-- Sidebar -->
     <div id="sidebar">
-        <h2>Map Tools</h2>
-        <p>This sidebar can be used for controls or information.</p>
+        <div id="sidebar">
+            <h3>Search Railway Line</h3>
+                <input type="text" id="lineInput" placeholder="Enter OSM ID">
+            <button onclick="searchLine()">Search</button>
+
+        <h3>Search Station</h3>
+            <input type="text" id="pointInput" placeholder="Enter station name">
+            <button onclick="searchPoint()">Search</button>
+        </div>
     </div>
 
     <!-- ================== JAVASCRIPT SECTION ================== -->
@@ -56,11 +63,11 @@
     <!-- ================== MAIN SCRIPT ================== -->
     <script>
 
-    // ================== 1. MAP INITIALIZATION ==================
+    // ================== MAP INITIALIZATION ==================
     // Setting map view to Kenya (learning how center + zoom works)
     const map = L.map('map').setView([0.0236, 37.9062], 6);
 
-    // ================== 2. BASE MAPS ==================
+    // ================== BASE MAPS ==================
     const OpenStreetMap = L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     );
@@ -109,7 +116,7 @@
         drawCircleMarker: false
     });
 
-    // ================== 4. DATA + STYLING ==================
+    // ==================  DATA + STYLING ==================
 
     // Styling railway lines based on attribute (learning classification)
     function styleRailway(feature) {
@@ -139,7 +146,7 @@
         }
     }
 
-// Load GeoJSON
+// Load GeoJSON railway lines
 const railwayLines = new L.GeoJSON.AJAX(
     "data/Railway_lines.geojson",
     {
@@ -153,6 +160,33 @@ railwayLines.on('data:loaded', function () {
     map.fitBounds(railwayLines.getBounds());
 });
 
+// Load GEOJSON railway points and style as circle markers with popups (learning point symbology and popups)
+const railwayPoints = new L.GeoJSON.AJAX(
+    "data/Railway_points.geojson",
+    {
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: 6,
+                fillColor: 'yellow',
+                color: 'black',
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.8
+            });
+        },
+        onEachFeature: function (feature, layer) {
+            const props = feature.properties;
+            const name = props.name || "Unnamed Point";
+            const popupContent = `
+                <strong>${name}</strong><br/>
+                Type: ${props.type || "N/A"}<br/>
+                OSM ID: ${props.osm_id}<br/>
+                Source: ${props.source || "N/A"}
+            `;
+            layer.bindPopup(popupContent);
+        }
+    }
+).addTo(map);
 
 // ================== FEATURE HANDLING ==================
 function onEachRailwayFeature(feature, layer) {
@@ -183,8 +217,10 @@ function onEachRailwayFeature(feature, layer) {
         layer.bindTooltip(tooltipContent, { permanent: false }).openTooltip();
     });
 }
+// Note: The above function handles both popups and click tooltips for railway lines, demonstrating interactivity and dynamic content based on feature attributes and user interaction. 
 
-    // ================== 5. LAYER CONTROL ==================
+
+    // ==================  LAYER CONTROL ==================
     const baseMaps = {
         "OpenStreetMap": OpenStreetMap,
         "Esri Imagery": Esri_WorldImagery,
@@ -192,7 +228,8 @@ function onEachRailwayFeature(feature, layer) {
     };
 
     const overlays = {
-        "Railway Lines": railwayLines
+        "Railway Lines": railwayLines,
+        "Railway Points": railwayPoints,
     };
 
     L.control.layers(baseMaps, overlays).addTo(map);
