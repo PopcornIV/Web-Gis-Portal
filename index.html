@@ -32,17 +32,15 @@
     <div id="map"></div>
 
     <!-- Sidebar -->
-    <div id="sidebar">
-        <div id="sidebar">
-            <h3>Search Railway Line</h3>
-                <input type="text" id="lineInput" placeholder="Enter OSM ID">
+     <div id="sidebar">
+        <h3>Search Railway Line</h3>
+            <input type="text" id="lineInput" placeholder="Enter OSM ID">
             <button onclick="searchLine()">Search</button>
 
         <h3>Search Station</h3>
             <input type="text" id="pointInput" placeholder="Enter station name">
             <button onclick="searchPoint()">Search</button>
         </div>
-    </div>
 
     <!-- ================== JAVASCRIPT SECTION ================== -->
 
@@ -219,7 +217,47 @@ function onEachRailwayFeature(feature, layer) {
 }
 // Note: The above function handles both popups and click tooltips for railway lines, demonstrating interactivity and dynamic content based on feature attributes and user interaction. 
 
+// Search functions for sidebar (learning how to link UI inputs to map interactions)
 
+function searchLine() {
+    const input = document.getElementById('lineInput').value.trim();    
+    if (!input) {
+        alert("Please enter an OSM ID to search.");
+        return;
+    }
+    let found = false;
+    railwayLines.eachLayer(function (layer) {
+        if (layer.feature.properties.osm_id.toString() === input) {
+            map.fitBounds(layer.getBounds());
+            layer.openPopup();
+            found = true;
+        }
+    });
+
+    if (!found) {
+        alert("Line not found.");
+    }
+}
+
+function searchPoint() {
+    const input = document.getElementById('pointInput').value.trim().toLowerCase();    
+    if (!input) {    
+        alert("Please enter a station name to search.");
+        return;
+    }   
+    let found = false;
+    railwayPoints.eachLayer(function (layer) {
+        const name = layer.feature.properties.name || "";
+        if (name.toLowerCase() === input) {
+            map.setView(layer.getLatLng(), 15);
+            layer.openPopup();
+            found = true;
+        }
+    });
+    if (!found) {
+        alert("Point not found.");
+    }
+}
     // ==================  LAYER CONTROL ==================
     const baseMaps = {
         "OpenStreetMap": OpenStreetMap,
